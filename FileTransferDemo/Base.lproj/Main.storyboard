@@ -22,16 +22,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N3X-Yn-9Xu">
-                                <rect key="frame" x="170" y="139" width="260" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tyrael@sanctuary.org/talrashastomb" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N3X-Yn-9Xu">
+                                <rect key="frame" x="170" y="125" width="260" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="Gh2-LW-VPA"/>
+                                    <constraint firstAttribute="width" constant="260" id="hLL-9B-3eg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="md1-lw-Iyx">
+                                <rect key="frame" x="170" y="163" width="260" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d92-hz-aQu">
-                                <rect key="frame" x="279" y="186" width="43" height="30"/>
+                                <rect key="frame" x="279" y="201" width="43" height="30"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -42,15 +47,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="centerX" secondItem="d92-hz-aQu" secondAttribute="centerX" id="9BE-3u-Pqt"/>
-                            <constraint firstItem="d92-hz-aQu" firstAttribute="top" secondItem="N3X-Yn-9Xu" secondAttribute="bottom" constant="17" id="McY-62-thX"/>
-                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SyE-3C-YXn"/>
-                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="top" secondItem="kWN-FH-5eX" secondAttribute="bottom" constant="22" id="pyG-Sj-ltD"/>
-                            <constraint firstItem="kWN-FH-5eX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="sQk-je-o0L"/>
-                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="centerX" secondItem="kWN-FH-5eX" secondAttribute="centerX" id="vCf-Mg-lHi"/>
+                            <constraint firstItem="md1-lw-Iyx" firstAttribute="trailing" secondItem="N3X-Yn-9Xu" secondAttribute="trailing" id="5XF-pf-omt"/>
+                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="top" secondItem="kWN-FH-5eX" secondAttribute="bottom" constant="8" symbolic="YES" id="DLP-0p-aR3"/>
+                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="centerX" secondItem="kWN-FH-5eX" secondAttribute="centerX" id="ObE-pU-jEz"/>
+                            <constraint firstItem="md1-lw-Iyx" firstAttribute="top" secondItem="N3X-Yn-9Xu" secondAttribute="bottom" constant="8" symbolic="YES" id="TfH-dJ-N50"/>
+                            <constraint firstItem="N3X-Yn-9Xu" firstAttribute="leading" secondItem="md1-lw-Iyx" secondAttribute="leading" id="Tm2-TE-JUE"/>
+                            <constraint firstItem="kWN-FH-5eX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="V1e-Ce-54P"/>
+                            <constraint firstItem="kWN-FH-5eX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jwR-c6-vAV"/>
+                            <constraint firstItem="d92-hz-aQu" firstAttribute="top" secondItem="md1-lw-Iyx" secondAttribute="bottom" constant="8" symbolic="YES" id="wFa-gX-ahR"/>
+                            <constraint firstItem="d92-hz-aQu" firstAttribute="centerX" secondItem="md1-lw-Iyx" secondAttribute="centerX" id="weq-gW-eBJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="E2j-V2-rJO"/>
+                    <connections>
+                        <outlet property="inputPassword" destination="md1-lw-Iyx" id="8qW-cC-yvc"/>
+                        <outlet property="inputUsername" destination="N3X-Yn-9Xu" id="rXd-AR-Uc9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,7 +86,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45R-gT-YEJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="deckardcain@sanctuary.org/tristram" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45R-gT-YEJ">
                                 <rect key="frame" x="170" y="122" width="260" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="4g4-Sa-3A8"/>
@@ -88,7 +100,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QWv-Fa-s0d">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Baal's Soulstone.png" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QWv-Fa-s0d">
                                 <rect key="frame" x="170" y="203" width="260" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -98,6 +110,9 @@
                                 <state key="normal" title="Begin Transfer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnTransferClicked:" destination="fGE-b8-Uil" eventType="touchUpInside" id="ouD-B1-lCP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -115,6 +130,10 @@
                             <constraint firstItem="45R-gT-YEJ" firstAttribute="centerX" secondItem="UQ6-04-rwt" secondAttribute="centerX" id="wu2-vq-Xzo"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputFilename" destination="QWv-Fa-s0d" id="Nbf-pM-DGz"/>
+                        <outlet property="inputRecipient" destination="45R-gT-YEJ" id="QhB-A6-RdG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xre-uY-L20" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

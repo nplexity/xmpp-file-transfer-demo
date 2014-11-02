@@ -10,18 +10,19 @@
 #import "XMPPRoster.h"
 #import "XMPPRosterMemoryStorage.h"
 #import "DDLog.h"
+#import "DDTTYLogger.h"
+#import "XMPPLogging.h"
 
-#if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
-#else
-  static const int ddLogLevel = LOG_LEVEL_INFO:
-#endif
 
 @interface AppDelegate () {
   XMPPStream *_xmppStream;
   XMPPRoster *_xmppRoster;
   XMPPRosterMemoryStorage *_xmppRosterStorage;
   XMPPIncomingFileTransfer *_xmppIncomingFileTransfer;
+
+  // Yes, this is bad. I'm simply lazy and this is a demo...
+  NSString *_password;
 }
 
 @end
@@ -34,6 +35,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (BOOL)          application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [DDLog addLogger:[DDTTYLogger sharedInstance]
+      withLogLevel:XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE | XMPP_LOG_FLAG_SEND_RECV];
   return YES;
 }
 
@@ -57,10 +60,15 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 }
 
+- (void)dealloc
+{
+  [self tearDownStream];
+}
+
 
 #pragma mark - Public Methods
 
-- (void)prepareStreamAndLogInWithJID:(XMPPJID *)jid
+- (void)prepareStreamAndLogInWithJID:(XMPPJID *)jid password:(NSString *)password
 {
   DDLogVerbose(@"Preparing the stream and logging in as %@", jid.full);
 
@@ -84,6 +92,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   NSError *err;
   if (![_xmppStream connectWithTimeout:30 error:&err]) {
     DDLogInfo(@"%@: Error connecting: %@", THIS_FILE, err);
+  } else {
+    _password = password;
   }
 }
 
@@ -105,12 +115,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   _xmppIncomingFileTransfer = nil;
 }
 
-- (NSURL *)documentsDir
-{
-  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                                                 inDomains:NSUserDomainMask] lastObject];
-}
-
 
 #pragma mark - XMPPStreamDelegate Methods
 
@@ -118,6 +122,26 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   DDLogVerbose(@"%@: Connected successfully.", THIS_FILE);
   DDLogVerbose(@"%@: Logging in as %@...", THIS_FILE, sender.myJID.full);
+
+  [_xmppStream authenticateWithPassword:_password error:nil];
+}
+
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
+{
+  DDLogVerbose(@"%@: Authenticated successfully.", THIS_FILE);
+
+  XMPPPresence *presence = [XMPPPresence presence];
+  [_xmppStream sendElement:presence];
+}
+
+- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
+{
+  DDLogInfo(@"%@: Stream disconnected with error: %@", THIS_FILE, error);
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
+{
+  DDLogInfo(@"%@: Authentication failed with error: %@", THIS_FILE, error);
 }
 
 

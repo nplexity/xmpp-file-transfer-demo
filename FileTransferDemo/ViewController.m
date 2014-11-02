@@ -7,28 +7,29 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *inputUsername;
+@property (weak, nonatomic) IBOutlet UITextField *inputPassword;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"should i?");
-    // TODO: perform login logic here, and if is valid, take the use to the next page
-    return YES;
+  // This method should really wait for confirmation that the user was able to
+  // log in successfully before proceeding (i.e. use
+  // shouldPerformSegueWithIdentifier:sender:, but again, this is a simple
+  // demo; you're capable of handling error-checking in your own app.
+
+  NSString *username = _inputUsername.text;
+  NSString *password = _inputPassword.text;
+
+  AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+  [appDelegate prepareStreamAndLogInWithJID:[XMPPJID jidWithString:username] password:password];
 }
 
 @end

@@ -20,7 +20,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
 
-- (void)prepareStreamAndLogInWithJID:(XMPPJID *)jid;
+- (void)prepareStreamAndLogInWithJID:(XMPPJID *)jid password:(NSString *)password;
 
 @end
 

@@ -10,6 +10,9 @@
 
 @interface TransferViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *inputRecipient;
+@property (weak, nonatomic) IBOutlet UITextField *inputFilename;
+
 @end
 
 @implementation TransferViewController
@@ -22,6 +25,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)btnTransferClicked:(id)sender {
 }
 
 /*
