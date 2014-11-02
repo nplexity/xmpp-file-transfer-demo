@@ -9,6 +9,100 @@ Note that it uses [my specific fork](https://github.com/jonstaff/XMPPFramework) 
 
 Both incoming file transfers and outgoing file transfers are functional within this demo, but I've left a significant amount of error-handling out, so you'll want to include that in your app.
 
+Usage
+=====
+
+Incoming File Transfers
+-----------------------
+
+Instantiate a new `XMPPIncomingFileTransfer`, activate it, add a delegate, and wait for a file transfer request.
+
+```objc
+_xmppIncomingFileTransfer = [XMPPIncomingFileTransfer new];
+[_xmppIncomingFileTransfer activate:_xmppStream];
+[_xmppIncomingFileTransfer addDelegate:self delegateQueue:dispatch_get_main_queue()];
+```
+
+Responding to `disco#info` queries and the like are handled for you.  You'll get a delegate call when an SI offer is received, at which point you can decide whether or not you wish to accept.  You can also set `autoAcceptFileTransfers = YES` and you won't need to call `acceptSIOffer:` yourself.
+
+```objc
+- (void)xmppIncomingFileTransfer:(XMPPIncomingFileTransfer *)sender
+                didFailWithError:(NSError *)error
+{
+  DDLogVerbose(@"%@: Incoming file transfer failed with error: %@", THIS_FILE, error);
+}
+
+- (void)xmppIncomingFileTransfer:(XMPPIncomingFileTransfer *)sender
+               didReceiveSIOffer:(XMPPIQ *)offer
+{
+  DDLogVerbose(@"%@: Incoming file transfer did receive SI offer. Accepting...", THIS_FILE);
+  [sender acceptSIOffer:offer];
+}
+
+- (void)xmppIncomingFileTransfer:(XMPPIncomingFileTransfer *)sender
+              didSucceedWithData:(NSData *)data
+                            named:(NSString *)name
+{
+  DDLogVerbose(@"%@: Incoming file transfer did succeed.", THIS_FILE);
+
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask,
+                                                       YES);
+  NSString *fullPath = [[paths lastObject] stringByAppendingPathComponent:name];
+  [data writeToFile:fullPath options:0 error:nil];
+
+  DDLogVerbose(@"%@: Data was written to the path: %@", THIS_FILE, fullPath);
+}
+```
+
+Outgoing File Transfers
+-----------------------
+
+To start a new outgoing file transfer, simply create an instance of `XMPPOutgoingFileTransfer`, activate it, add a delegate, and send your data:
+
+```objc
+_fileTransfer = [[XMPPOutgoingFileTransfer alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+[_fileTransfer activate:[self appDelegate].xmppStream];
+[_fileTransfer addDelegate:self delegateQueue:dispatch_get_main_queue()];
+
+NSError *err;
+if (![_fileTransfer sendData:data
+                       named:filename
+                 toRecipient:[XMPPJID jidWithString:recipient]
+                 description:@"Baal's Soulstone, obviously."
+                       error:&err]) {
+  DDLogInfo(@"You messed something up: %@", err);
+}
+```
+
+The following delegate calls when get invoked when appropriate:
+
+```objc
+- (void)xmppOutgoingFileTransfer:(XMPPOutgoingFileTransfer *)sender
+                didFailWithError:(NSError *)error
+{
+  DDLogInfo(@"Outgoing file transfer failed with error: %@", error);
+
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                  message:@"There was an error sending your file. See the logs."
+                                                 delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+}
+
+- (void)xmppOutgoingFileTransferDidSucceed:(XMPPOutgoingFileTransfer *)sender
+{
+  DDLogVerbose(@"File transfer successful.");
+
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                  message:@"Your file was sent successfully."
+                                                 delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+}
+```
 
 Developed By
 ============
