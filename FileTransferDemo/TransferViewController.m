@@ -7,36 +7,89 @@
 //
 
 #import "TransferViewController.h"
+#import "AppDelegate.h"
+#import "DDLog.h"
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @interface TransferViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *inputRecipient;
 @property (weak, nonatomic) IBOutlet UITextField *inputFilename;
+@property (nonatomic, strong) XMPPOutgoingFileTransfer *fileTransfer;
 
 @end
 
 @implementation TransferViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (IBAction)btnTransferClicked:(id)sender {
+- (AppDelegate *)appDelegate
+{
+  return (AppDelegate *) [[UIApplication sharedApplication] delegate];
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)btnTransferClicked:(id)sender
+{
+  if (!_fileTransfer) {
+    _fileTransfer = [[XMPPOutgoingFileTransfer alloc]
+                                               initWithDispatchQueue:dispatch_get_main_queue()];
+    [_fileTransfer activate:[self appDelegate].xmppStream];
+    [_fileTransfer addDelegate:self delegateQueue:dispatch_get_main_queue()];
+  }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+  NSString *recipient = _inputRecipient.text;
+  NSString *filename = _inputFilename.text;
+
+  // do error checking fun stuff...
+
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask,
+                                                       YES);
+  NSString *fullPath = [[paths lastObject] stringByAppendingPathComponent:filename];
+  NSData *data = [NSData dataWithContentsOfFile:fullPath];
+
+  NSError *err;
+  if (![_fileTransfer sendData:data
+                         named:filename
+                   toRecipient:[XMPPJID jidWithString:recipient]
+                   description:@"Baal's Soulstone, obviously."
+                         error:&err]) {
+    DDLogInfo(@"You messed something up: %@", err);
+  }
 }
-*/
+
+
+#pragma mark - XMPPOutgoingFileTransferDelegate Methods
+
+- (void)xmppOutgoingFileTransfer:(XMPPOutgoingFileTransfer *)sender
+                didFailWithError:(NSError *)error
+{
+  DDLogInfo(@"Outgoing file transfer failed with error: %@", error);
+
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                  message:@"There was an error sending your file. See the logs."
+                                                 delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+}
+
+- (void)xmppOutgoingFileTransferDidSucceed:(XMPPOutgoingFileTransfer *)sender
+{
+  DDLogVerbose(@"File transfer successful.");
+
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                  message:@"Your file was sent successfully."
+                                                 delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+}
+
 
 @end

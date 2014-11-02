@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPPOutgoingFileTransfer.h"
 
-@interface TransferViewController : UIViewController
+@interface TransferViewController : UIViewController <XMPPOutgoingFileTransferDelegate>
 
 @end

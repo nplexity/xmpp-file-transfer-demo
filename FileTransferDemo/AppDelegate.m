@@ -118,7 +118,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 #pragma mark - XMPPStreamDelegate Methods
 
-- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
+- (void)xmppStreamDidConnect:(XMPPStream *)sender
 {
   DDLogVerbose(@"%@: Connected successfully.", THIS_FILE);
   DDLogVerbose(@"%@: Logging in as %@...", THIS_FILE, sender.myJID.full);
