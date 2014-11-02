@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPPStream.h"
+#import "XMPPIncomingFileTransfer.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class XMPPStream;
+@class XMPPJID;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate,
+                                      XMPPStreamDelegate,
+                                      XMPPIncomingFileTransferDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong, readonly) XMPPStream *xmppStream;
 
+- (void)prepareStreamAndLogInWithJID:(XMPPJID *)jid;
 
 @end
 
