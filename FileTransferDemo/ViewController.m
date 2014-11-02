@@ -24,4 +24,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSLog(@"should i?");
+    // TODO: perform login logic here, and if is valid, take the use to the next page
+    return YES;
+}
+
 @end

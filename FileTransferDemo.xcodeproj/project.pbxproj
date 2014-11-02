@@ -156,6 +156,7 @@
 		28658D141A04FE2F00EFE60A /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28658C861A04FE2F00EFE60A /* libidn.a */; };
 		28658D171A04FEC400EFE60A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28658D161A04FEC400EFE60A /* libresolv.dylib */; };
 		28658D1D1A05014B00EFE60A /* XMPPNamespaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 28658D1C1A05014B00EFE60A /* XMPPNamespaces.m */; };
+		28658D201A05D52700EFE60A /* TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28658D1F1A05D52700EFE60A /* TransferViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +478,8 @@
 		28658D161A04FEC400EFE60A /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		28658D1B1A05014B00EFE60A /* XMPPNamespaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPNamespaces.h; sourceTree = "<group>"; };
 		28658D1C1A05014B00EFE60A /* XMPPNamespaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPNamespaces.m; sourceTree = "<group>"; };
+		28658D1E1A05D52700EFE60A /* TransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferViewController.h; sourceTree = "<group>"; };
+		28658D1F1A05D52700EFE60A /* TransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,11 +525,13 @@
 			isa = PBXGroup;
 			children = (
 				28658B191A04FE2E00EFE60A /* XMPPFramework */,
+				28658AFD1A04F81400EFE60A /* Main.storyboard */,
 				28658AF71A04F81400EFE60A /* AppDelegate.h */,
 				28658AF81A04F81400EFE60A /* AppDelegate.m */,
 				28658AFA1A04F81400EFE60A /* ViewController.h */,
 				28658AFB1A04F81400EFE60A /* ViewController.m */,
-				28658AFD1A04F81400EFE60A /* Main.storyboard */,
+				28658D1E1A05D52700EFE60A /* TransferViewController.h */,
+				28658D1F1A05D52700EFE60A /* TransferViewController.m */,
 				28658B001A04F81400EFE60A /* Images.xcassets */,
 				28658B021A04F81400EFE60A /* LaunchScreen.xib */,
 				28658AF31A04F81400EFE60A /* Supporting Files */,
@@ -1604,6 +1609,7 @@
 				28658CAA1A04FE2F00EFE60A /* XMPPRosterMemoryStorage.m in Sources */,
 				28658C8D1A04FE2F00EFE60A /* XMPPPlainAuthentication.m in Sources */,
 				28658CEF1A04FE2F00EFE60A /* XMPPStreamManagement.m in Sources */,
+				28658D201A05D52700EFE60A /* TransferViewController.m in Sources */,
 				28658D091A04FE2F00EFE60A /* DDLog.m in Sources */,
 				28658C981A04FE2F00EFE60A /* XMPPModule.m in Sources */,
 				28658CC11A04FE2F00EFE60A /* XMPPRoom.m in Sources */,
