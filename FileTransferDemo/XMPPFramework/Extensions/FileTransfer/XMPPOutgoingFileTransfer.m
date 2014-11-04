@@ -577,12 +577,12 @@ NSString *const XMPPOutgoingFileTransferErrorDomain = @"XMPPOutgoingFileTransfer
         // Send the list of streamhosts to the recipient
         [xmppStream sendElement:iq];
 
-
-        NSAssert(_asyncSocket == nil, @"_asyncSocket should be nil at this point.");
-
         // Create a socket to listen for a direct connection
-        _asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self
-                                                  delegateQueue:moduleQueue];
+        if (!_asyncSocket) {
+          _asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self
+                                                    delegateQueue:moduleQueue];    
+        }
+        
         NSError *error;
 
         if (![_asyncSocket acceptOnPort:_localPort error:&error]) {
