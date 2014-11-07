@@ -9,6 +9,23 @@ Note that it uses [my specific fork](https://github.com/jonstaff/XMPPFramework) 
 
 Both incoming file transfers and outgoing file transfers are functional within this demo, but I've left a significant amount of error-handling out, so you'll want to include that in your app.
 
+Server Settings
+===============
+
+In order for SOCKS5 to work properly, your server must be configured to handle proxy connections.  I've only tested this using **ejabberd**, but these are the `mod_proxy65` settings I used:
+
+```
+{mod_proxy65,  [
+     {ip, {0,0,0,0}},
+     {hostname, "myhostnamehere"},
+     {port, 7777},
+     {access, all},
+     {shaper, c2s_shaper}
+]},
+```
+
+If you're unable to get the proxy functioning, you always have the option to set `disableSOCKS5 = YES`, which will force an IBB transfer instead.  This is slower, but it's very widely supported.
+
 Usage
 =====
 
