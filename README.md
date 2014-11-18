@@ -5,7 +5,7 @@ This application is merely a brief demo of how to use the file transfer extensio
 
 A detailed blog post can be found [here](jonathonstaff.com/tackling-file-transfers-with-the-xmppframework/).
 
-Note that it uses [my specific fork](https://github.com/jonstaff/XMPPFramework) of the XMPPFramework unless/until they pull it into the master repo.  I'll update this readme accordingly if that happens.
+My changes have been merged into the master branch of the [XMPPFramework](https://github.com/robbiehanson/XMPPFramework), so you'll want to include the latest version in your project.
 
 Both incoming file transfers and outgoing file transfers are functional within this demo, but I've left a significant amount of error-handling out, so you'll want to include that in your app.
 
