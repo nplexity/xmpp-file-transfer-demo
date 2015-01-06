@@ -3,7 +3,7 @@ File Transfer using XMPPFramework
 
 This application is merely a brief demo of how to use the file transfer extension of the XMPPFramework.
 
-A detailed blog post can be found [here](jonathonstaff.com/tackling-file-transfers-with-the-xmppframework/).
+A detailed blog post can be found [here](jonathonstaff.com/blog/tackling-file-transfers-with-the-xmppframework/).
 
 My changes have been merged into the master branch of the [XMPPFramework](https://github.com/robbiehanson/XMPPFramework), so you'll want to include the latest version in your project.
 
