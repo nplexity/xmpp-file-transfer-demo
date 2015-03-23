@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="80P-Yk-3FI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="80P-Yk-3FI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -114,25 +115,42 @@
                                     <action selector="btnTransferClicked:" destination="fGE-b8-Uil" eventType="touchUpInside" id="ouD-B1-lCP"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHw-ju-xNO">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your documents directory is located at:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja0-EJ-Mu2">
+                                <rect key="frame" x="174" y="291" width="253" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="45R-gT-YEJ" firstAttribute="leading" secondItem="QWv-Fa-s0d" secondAttribute="leading" id="0BO-dB-UX2"/>
                             <constraint firstItem="QWv-Fa-s0d" firstAttribute="top" secondItem="joN-R2-ZCY" secondAttribute="bottom" constant="13" id="39g-4Z-SR8"/>
+                            <constraint firstAttribute="centerX" secondItem="Ja0-EJ-Mu2" secondAttribute="centerX" id="6gM-NT-vOv"/>
                             <constraint firstItem="5EB-6D-yiV" firstAttribute="top" secondItem="bqC-R1-39q" secondAttribute="bottom" constant="29" id="7Wn-Ss-SUY"/>
                             <constraint firstItem="QWv-Fa-s0d" firstAttribute="centerX" secondItem="8lz-lV-oSJ" secondAttribute="centerX" id="9mq-Tv-BPX"/>
                             <constraint firstItem="45R-gT-YEJ" firstAttribute="top" secondItem="5EB-6D-yiV" secondAttribute="bottom" constant="8" symbolic="YES" id="LQo-Qg-gxW"/>
                             <constraint firstItem="5EB-6D-yiV" firstAttribute="centerX" secondItem="45R-gT-YEJ" secondAttribute="centerX" id="Ywz-ZP-iqG"/>
+                            <constraint firstItem="RHw-ju-xNO" firstAttribute="leading" secondItem="UQ6-04-rwt" secondAttribute="leadingMargin" constant="10" id="bFD-3e-TC7"/>
                             <constraint firstItem="QWv-Fa-s0d" firstAttribute="trailing" secondItem="45R-gT-YEJ" secondAttribute="trailing" id="fdl-X8-NT4"/>
+                            <constraint firstItem="RHw-ju-xNO" firstAttribute="top" secondItem="Ja0-EJ-Mu2" secondAttribute="bottom" constant="10" id="gCy-Rs-hUb"/>
                             <constraint firstItem="joN-R2-ZCY" firstAttribute="top" secondItem="45R-gT-YEJ" secondAttribute="bottom" constant="17" id="hhf-Fa-PNL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RHw-ju-xNO" secondAttribute="trailing" constant="10" id="jhG-uh-FN1"/>
                             <constraint firstItem="joN-R2-ZCY" firstAttribute="centerX" secondItem="QWv-Fa-s0d" secondAttribute="centerX" id="msf-WC-fNj"/>
                             <constraint firstItem="8lz-lV-oSJ" firstAttribute="top" secondItem="QWv-Fa-s0d" secondAttribute="bottom" constant="8" symbolic="YES" id="qXM-a5-oii"/>
+                            <constraint firstItem="Ja0-EJ-Mu2" firstAttribute="top" secondItem="8lz-lV-oSJ" secondAttribute="bottom" constant="20" id="vL1-ss-7Ev"/>
                             <constraint firstItem="45R-gT-YEJ" firstAttribute="centerX" secondItem="UQ6-04-rwt" secondAttribute="centerX" id="wu2-vq-Xzo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="inputFilename" destination="QWv-Fa-s0d" id="Nbf-pM-DGz"/>
                         <outlet property="inputRecipient" destination="45R-gT-YEJ" id="QhB-A6-RdG"/>
+                        <outlet property="txtDocumentsDir" destination="RHw-ju-xNO" id="KYQ-mE-Upd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xre-uY-L20" userLabel="First Responder" sceneMemberID="firstResponder"/>

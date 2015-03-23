@@ -16,6 +16,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @property (weak, nonatomic) IBOutlet UITextField *inputRecipient;
 @property (weak, nonatomic) IBOutlet UITextField *inputFilename;
+@property (weak, nonatomic) IBOutlet UILabel *txtDocumentsDir;
 @property (nonatomic, strong) XMPPOutgoingFileTransfer *fileTransfer;
 
 @end
@@ -26,11 +27,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
   [super viewDidLoad];
 
+  _txtDocumentsDir.text = [self documentsDirectory];
 }
 
 - (AppDelegate *)appDelegate
 {
   return (AppDelegate *) [[UIApplication sharedApplication] delegate];
+}
+
+- (NSString *)documentsDirectory
+{
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask,
+                                                       YES);
+  return [paths lastObject];
 }
 
 - (IBAction)btnTransferClicked:(id)sender
@@ -47,10 +57,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
   // do error checking fun stuff...
 
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                       NSUserDomainMask,
-                                                       YES);
-  NSString *fullPath = [[paths lastObject] stringByAppendingPathComponent:filename];
+  NSString *fullPath = [[self documentsDirectory] stringByAppendingPathComponent:filename];
   NSData *data = [NSData dataWithContentsOfFile:fullPath];
 
   NSError *err;
